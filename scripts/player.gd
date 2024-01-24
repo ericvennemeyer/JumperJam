@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 var speed = 300.0
 var gravity = 15.0

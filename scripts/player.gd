@@ -1,9 +1,12 @@
 extends CharacterBody2D
 class_name Player
 
+@onready var animator = $AnimationPlayer
+
 var speed = 300.0
 var gravity = 15.0
 var max_fall_velocity = 1000.0
+var jump_velocity = -800
 var viewport_size
 
 # Called when the node enters the scene tree for the first time.
@@ -12,7 +15,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if velocity.y > 0:
+		if animator.current_animation != "fall":
+			animator.play("fall")
+	elif velocity.y < 0:
+		if animator.current_animation != "jump()":
+			animator.play("jump")
 
 func _physics_process(delta):
 	velocity.y += gravity
@@ -33,3 +41,6 @@ func _physics_process(delta):
 #	elif global_position.x < -margin:
 #		global_position.x = viewport_size.x + margin
 	global_position.x = wrap(global_position.x, -margin, viewport_size.x + margin)
+
+func jump():
+	velocity.y = jump_velocity

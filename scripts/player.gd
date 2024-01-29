@@ -40,6 +40,8 @@ func _physics_process(delta):
 #		global_position.x = -margin
 #	elif global_position.x < -margin:
 #		global_position.x = viewport_size.x + margin
+	
+	# Teleport player if they go off screen
 	global_position.x = wrap(global_position.x, -margin, viewport_size.x + margin)
 
 func jump():

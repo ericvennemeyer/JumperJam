@@ -21,7 +21,7 @@ func _ready():
 	
 	new_game()
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 	if Input.is_action_just_pressed("reset"):

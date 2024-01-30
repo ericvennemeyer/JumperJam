@@ -21,7 +21,7 @@ func _ready():
 	rect_shape.set_size(rect_shape_size)
 	destroyer_shape.shape = rect_shape
 
-func _process(delta):
+func _process(_delta):
 	if player:
 		if limit_bottom > player.global_position.y + (viewport_size.y / 2):
 			limit_bottom = player.global_position.y + (viewport_size.y / 2)
@@ -32,7 +32,7 @@ func _process(delta):
 			if area is Platform:
 				area.queue_free()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player:
 		global_position.y = player.global_position.y
 

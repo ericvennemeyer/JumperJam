@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var level_generator = $LevelGenerator
+@onready var ground_sprite = $GroundSprite
 
 var camera_scene = preload("res://scenes/game_camera.tscn")
 var player_scene = preload("res://scenes/player.tscn")
@@ -14,6 +15,9 @@ func _ready():
 	var viewport_size = get_viewport_rect().size
 	player_spawn_pos.x = viewport_size.x / 2.0
 	player_spawn_pos.y = viewport_size.y - player_spawn_pos_y_offset
+	
+	ground_sprite.global_position.x = viewport_size.x / 2.0
+	ground_sprite.global_position.y = viewport_size.y
 	
 	new_game()
 

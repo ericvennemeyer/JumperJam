@@ -4,14 +4,21 @@ class_name Player
 @onready var animator = $AnimationPlayer
 
 var speed = 300.0
+var accelerometer_speed = 130.0
 var gravity = 15.0
 var max_fall_velocity = 1000.0
 var jump_velocity = -800
 var viewport_size
 
+var use_accelerometer = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	viewport_size = get_viewport_rect().size
+	
+	var os_name = OS.get_name()
+	if os_name == "iOS" || os_name == "Android":
+		use_accelerometer = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -27,11 +34,15 @@ func _physics_process(_delta):
 	if velocity.y > max_fall_velocity:
 		velocity.y = max_fall_velocity
 	
-	var direction = Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * speed
+	if use_accelerometer:
+		var mobile_input = Input.get_accelerometer()
+		velocity.x = mobile_input.x * accelerometer_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		var direction = Input.get_axis("move_left", "move_right")
+		if direction:
+			velocity.x = direction * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
 		
 	move_and_slide()
 	

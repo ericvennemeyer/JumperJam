@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1h65cg4pwiem"]
+[gd_scene load_steps=4 format=3 uid="uid://d1h65cg4pwiem"]
 
 [ext_resource type="Script" path="res://scripts/Screens.gd" id="1_gjihx"]
+[ext_resource type="PackedScene" uid="uid://dn1jgd2ktuhnv" path="res://scenes/title_screen.tscn" id="2_aclr5"]
 [ext_resource type="Texture2D" uid="uid://s42l4hdmjq43" path="res://assets/textures/ui/gear.png" id="2_ongx7"]
 
 [node name="Screens" type="CanvasLayer"]
 script = ExtResource("1_gjihx")
+
+[node name="TitleScreen" parent="." instance=ExtResource("2_aclr5")]
 
 [node name="Debug" type="Control" parent="."]
 z_index = 1000
